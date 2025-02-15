@@ -25,7 +25,7 @@ def open_files(file_path):
             print(f"❌ Error loading {dataset}: {e}")
             dfs.append(None)
 
-    return dfs  # Returns [kaggle_df, heart_disease_df, brfss_df]
+    return dfs 
 
 def preprocess_data():
     """Preprocesses data by dropping unnecessary columns and optimizing dtypes."""
