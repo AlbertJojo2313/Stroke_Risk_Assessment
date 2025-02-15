@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # Set the data folder path (can be changed easily)
-FILE_PATH = os.path.expanduser("~/DataScience_Projects/Stroke_Risk_Assessment/data")
+FILE_PATH = os.path.expanduser("~/DataScience_Projects/Stroke_Risk_Assessment/data/Raw")
 
 def open_files(file_path):
 
