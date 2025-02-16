@@ -1,12 +1,12 @@
-Top Priority (Essential for Stroke Risk Assessment)
-Demographics & Anthropometrics:
+# Top Priority (Essential for Stroke Risk Assessment) using BRFSS
 
+## Demographics & Anthropometrics:
 HTM4 (Height in meters)
 BMI
 _SEX (Calculated Sex variable)
-Age (if available in dataset)
-Pre-existing Conditions (Heart, Stroke, & Diabetes):
+(Age, if available in dataset)
 
+## Pre-existing Conditions (Heart, Stroke, & Diabetes):
 CVDSTRK3 (Ever told had a stroke)
 BPHIGH6 (Ever told had high blood pressure)
 BPMEDS1 (Currently taking prescription medicine for high blood pressure)
@@ -20,77 +20,35 @@ DIABTYPE (Type of diabetes)
 INSULIN1 (Currently taking insulin)
 _RFHYPE6 (High blood pressure diagnosis)
 _RFCHOL3 (High cholesterol diagnosis)
-_MICHD (Coronary heart disease or myocardial infarction history)
-Lifestyle & Behavioral Risk Factors:
+_MICHD (History of coronary heart disease or myocardial infarction)
 
+## Lifestyle & Behavioral Risk Factors:
 _SMOKER (Four-level smoking status)
 SMOKE100 (Ever smoked 100 cigarettes)
 SMOKEDAY2 (Current smoking frequency)
-USENOW3 (Use of smokeless tobacco)
 ECIGNOW2 (E-cigarette use)
-_CURECI2 (Current e-cigarette users)
-STOPSMK2 (Attempted to quit smoking in past 12 months)
-MENTCIGS (Menthol cigarette use)
-MENTECIG (Menthol e-cigarette use)
 ALCDAY4 (Alcohol use in past 30 days)
 AVEDRNK3 (Average drinks per drinking day)
-DRNK3GE5 (Binge drinking frequency in past 30 days)
+DRNK3GE5 (Binge drinking frequency)
 MAXDRNKS (Max drinks consumed in a single occasion)
-DRNKANY6 (Had alcohol in past 30 days)
 _RFBING6 (Binge drinking status)
 _RFDRHV8 (Heavy drinking status)
 Physical Activity & Exercise:
-
-_TOTINDA (Any physical activity in past 30 days) (Maybe)
 PA3MIN (Total minutes of physical activity per week)
 PA3VIGM_ (Minutes of vigorous activity per week)
 _PACAT3 (Physical activity categories)
-Social & Economic Factors:
 
+## Social & Economic Factors:
 MARITAL (Marital status)
 EMPLOY1 (Employment status)
-INCOME3 (Annual household income) (Maybe)
 RENTHOM1 (Own or rent home)
-VETERAN3 (Military service history)
-Secondary Priority (Mental Health, COVID, Additional Factors)
-Mental Health & Stress:
 
+## Mental Health & Stress:
 LSATISFY (Life satisfaction)
-EMTSUPPRT (Social/emotional support frequency)
-SDLONELY (Frequency of loneliness)
 SDHSTRE1 (Stress frequency in past 30 days)
 General & Physical Health:
-
 GENHLTH (Self-rated general health)
-PHYSHLTH (Days of poor physical health in past 30 days) (Maybe)
-POORHLTH (Days poor health limited activities) (Maybe)
 COVID-19 Factors:
-
 COVIDPO1 (Ever tested positive for COVID-19)
-COVIDVA1 (Received at least one COVID-19 vaccine)
-COVIDNU2 (Total COVID-19 vaccinations received)
-Marijuana Use (Consolidated into one feature):
-
-MARIJANI (Days used in past 30 days)
-MARJSMOK, MARJEAT, MARJVAPE, MARJDAB, MARJOTHR (Modes of use)
-Lower Priority (Race, Metropolitan, Calculated Values, Health Insurance, Other Tests)
 Race & Discrimination in Healthcare:
 RRCLASS3 (How others classify their race)
-RRHCARE4 (Perceived racial differences in healthcare)
-_IMPRACE (Imputed race/ethnicity value)
-_RACEGR3 (Five-level race/ethnicity category)
-_RACEPRV (Race groups used for prevalence tables)
-Geographical & Socioeconomic Context:
-_METSTAT (Metropolitan status)
-_URBSTAT (Urban/Rural status)
-MSCODE (Metropolitan status code)
-Health Insurance Coverage:
-_HLTHPL1 (Has any health insurance)
-_HCVU653 (Ages 18-64 with any health insurance)
-Additional Medical & Screening Factors:
-LCSNUMCG (Cigarettes per day when smoking)
-LCSCTSC1 (Ever had chest CT/CAT scan)
-LCSSCNCR (CT scan done for lung cancer screening)
-CRGVPRB3 (Health issue of person they care for)
-ASPIRIN (Frequency of aspirin use for heart disease prevention)
-_LLCPWT (Survey weighting variable)
