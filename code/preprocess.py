@@ -8,7 +8,7 @@ def open_files(file_path):
 
 
     """Loads CSV files into DataFrames with optimized dtypes."""
-    datasets = ["kaggle_stroke.csv", "brfss_2023.csv"]
+    datasets = ["brfss_2023.csv"]
     dfs = []
 
     for dataset in datasets:
@@ -29,12 +29,7 @@ def open_files(file_path):
 
 def preprocess_data():
     """Preprocesses data by dropping unnecessary columns and optimizing dtypes."""
-    kaggle_df, brfss_df = open_files(FILE_PATH)
-
-    # Drop unwanted columns safely (only if DataFrame is loaded)
-    if kaggle_df is not None:
-        kaggle_df.drop(columns=['id', 'Residence_type'], inplace=True, errors='ignore')
-        kaggle_df = kaggle_df.astype({'age': 'int32', 'bmi': 'float32'}, errors='ignore')  # Optimize types
+    brfss_df = open_files(FILE_PATH)
 
     ##Brfss_cols
     columns_to_keep = [
