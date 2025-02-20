@@ -20,6 +20,7 @@ def open_files(file_path):
         print(f"❌ Error loading {dataset}: {e}")
         return None
 
+
 def create_dataframe():
     """Preprocesses data by dropping unnecessary columns and optimizing dtypes."""
     brfss_df = open_files(FILE_PATH)
@@ -45,6 +46,13 @@ def create_dataframe():
     brfss_df = brfss_df.filter(items=[col for col in columns_to_keep if col in brfss_df.columns])
     
     return brfss_df
+VALUE_TABLES = {
+    'CVDSTRK3':{1:'Yes',2:'No',7:'Dont know/Not sure',9:'Refused',BLANK:'NA'},
+    'BPHIGH6':{1:'Yes', 2:'Yes but during pregancy(Female)', 3:'No', 4:'Told Borderline_hyper', 7:'Not sure', 9:'Refused', BLANK:'NA'},
+    'BPMEDS1':{1:'Yes', 2:'No', 7:'Not sure', 9:'Refused', BLANK:'NA'},
+    'TOLDHI3':{1:'Yes',2:'No',7:'Not sure', 9:'Refused', BLANK:'NA'},
+    
+}
 def preprocess_dataframe():
     df = create_dataframe()
 
