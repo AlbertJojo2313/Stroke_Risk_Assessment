@@ -20,7 +20,7 @@ def open_files(file_path):
         print(f"❌ Error loading {dataset}: {e}")
         return None
 
-def preprocess_data():
+def create_dataframe():
     """Preprocesses data by dropping unnecessary columns and optimizing dtypes."""
     brfss_df = open_files(FILE_PATH)
     
@@ -30,12 +30,13 @@ def preprocess_data():
     # Columns to keep
     columns_to_keep = [
         'HTM4', 'BMI', 'CVDSTRK3', 'BPHIGH6', 'BPMEDS1', 'TOLDHI3', 'CHOLMED3', 'CVDINFR4', 
-        'CVDCRHD4', 'DIABETE4', 'PREDIAB2', 'DIABTYPE', 'INSULIN1', '_RFHYPE6', '_RFCHOL3', '_MICHD',
-        '_SMOKER',  'SMOKEDAY2', 'USENOW3', 'ECIGNOW2', '_CURECI2', 'MENTCIGS', 
-        'MENTECIG', 'AVEDRNK3', '_RFBING6', '_RFDRHV8',
+        'CVDCRHD4',  'PREDIAB2', 'DIABETE4', '_RFHYPE6', '_RFCHOL3', '_MICHD',
+        '_SMOKER',  'SMOKEDAY2', 'USENOW3', 'ECIGNOW2', '_CURECI2', 
+        'AVEDRNK3', '_RFBING6', '_RFDRHV8',
         '_PACAT3', 'MARITAL', 'EMPLOY1', 'INCOME3', 'RENTHOM1',
         'VETERAN3', 'LSATISFY', 'EMTSUPPRT', 'SDLONELY', 'SDHSTRE1',
-        'COVIDPO1', 'COVIDVA1', 'COVIDNU2', 'MARIJANI', '_IMPRACE',
+        'COVIDPO1', #'COVIDVA1', 
+        'MARIJANI', '_IMPRACE',
         '_METSTAT', '_URBSTAT', '_HLTHPL1', 'LCSNUMCG', 'LCSCTSC1',
         'ASPIRIN'
     ]
@@ -44,10 +45,24 @@ def preprocess_data():
     brfss_df = brfss_df.filter(items=[col for col in columns_to_keep if col in brfss_df.columns])
     
     return brfss_df
+def preprocess_dataframe():
+    df = create_dataframe()
+
+    df1 = df.copy()
+
+    #Rename cols
+    columns = {
+        "HTM4":"Height(m)",
+        "CVDSTRK3":"",
+    }
+    
+    
+    
+
 
 def main():
     """Runs the preprocessing pipeline and prints dataset info."""
-    brfss_df = preprocess_data()
+    brfss_df = create_dataframe()
     
     if brfss_df is not None:
         print(f"\n✅ BRFSS Dataset Loaded:")
