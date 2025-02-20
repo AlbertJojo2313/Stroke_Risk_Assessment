@@ -20,7 +20,12 @@ def open_files(file_path):
         print(f"❌ Error loading {dataset}: {e}")
         return None
 
+
 def create_dataframe():
+    return dfs 
+
+def preprocess_data():
+
     """Preprocesses data by dropping unnecessary columns and optimizing dtypes."""
     brfss_df = open_files(FILE_PATH)
     
