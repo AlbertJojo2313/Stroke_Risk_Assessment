@@ -2,20 +2,17 @@
 import os
 import pandas as pd
 import numpy as np
-from preprocess import preprocess_data
+from preprocess import create_dataframe
 
 OUTPUT_DIR = os.path.expanduser("~/DataScience_Projects/Stroke_Risk_Assessment/data/Processed")
 def convert_df_to_csv():
-    kaggle_df, brfss_df = preprocess_data()
+    brfss_df = create_dataframe()
 
     
-
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
-    kaggle_file_path = os.path.join(OUTPUT_DIR,"kaggle.csv")
     brfss_file_path = os.path.join(OUTPUT_DIR,"brfss.csv")
 
-    kaggle_df.to_csv(kaggle_file_path)
     brfss_df.to_csv(brfss_file_path)
 
 
