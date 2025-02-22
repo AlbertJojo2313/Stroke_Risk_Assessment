@@ -46,24 +46,33 @@ def create_dataframe():
     brfss_df = brfss_df.filter(items=[col for col in columns_to_keep if col in brfss_df.columns])
     
     return brfss_df
+"""
 VALUE_TABLES = {
-    'CVDSTRK3':{1:'Yes',2:'No',7:'Dont know/Not sure',9:'Refused',BLANK:'NA'},
-    'BPHIGH6':{1:'Yes', 2:'Yes but during pregancy(Female)', 3:'No', 4:'Told Borderline_hyper', 7:'Not sure', 9:'Refused', BLANK:'NA'},
-    'BPMEDS1':{1:'Yes', 2:'No', 7:'Not sure', 9:'Refused', BLANK:'NA'},
-    'TOLDHI3':{1:'Yes',2:'No',7:'Not sure', 9:'Refused', BLANK:'NA'},
+    'CVDSTRK3':{1:'Yes',2:'No',7:'Dont know/Not sure',9:'Refused'},
+    'BPHIGH6':{1:'Yes', 2:'Yes but during pregancy(Female)', 3:'No', 4:'Told Borderline_hyper', 7:'Not sure', 9:'Refused'},
+    'BPMEDS1':{1:'Yes', 2:'No', 7:'Not sure', 9:'Refused'},
+    'TOLDHI3':{1:'Yes',2:'No',7:'Not sure', 9:'Refused'},
+    'CHOLMED3':{1:'Yes', 2:'N0',7:'Not sure', 9:'Refused'}
+    #'CVDINFR4':{}
+    
+    
     
 }
+"""
 def preprocess_dataframe():
     df = create_dataframe()
 
     df1 = df.copy()
-
+    
+    """
     #Rename cols
     columns = {
         "HTM4":"Height(m)",
         "CVDSTRK3":"",
     }
+    """
     
+    df1 = df1.replace(VALUE_TABLES, "NA")
     
     
 
@@ -72,12 +81,14 @@ def main():
     """Runs the preprocessing pipeline and prints dataset info."""
     brfss_df = create_dataframe()
     
+    """
     if brfss_df is not None:
         print(f"\n✅ BRFSS Dataset Loaded:")
         print(f"Shape: {brfss_df.shape}")
         print(f"Columns: {list(brfss_df.columns)}\n")
     else:
         print("\n❌ BRFSS Dataset is missing or could not be processed.\n")
-
+    """
+    print(brfss_df.head(10))
 if __name__ == "__main__":
     main()
