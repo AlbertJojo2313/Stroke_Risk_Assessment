@@ -60,7 +60,7 @@ def preprocess_dataframe():
 
 
 
-def pipe_line():
+def view_dataframe_info():
     # brfss_df = create_dataframe() Pipe-Line Check
 
     
