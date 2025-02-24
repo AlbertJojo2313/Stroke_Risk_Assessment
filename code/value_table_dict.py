@@ -5,6 +5,12 @@ BASE_MAPPING = {
 }
 
 VALUE_TABLES = {
+    'HTM4': {
+        None: 'NA'
+    },
+    'BMI': {
+        None: 'NA'
+    },
     # --- Cardiovascular ---
     'CVDSTRK3': {
         1: 'Yes',
@@ -185,6 +191,8 @@ VALUE_TABLES = {
         **BASE_MAPPING
     }
 }
+"""
 # Convert all keys to strings in the VALUE_TABLES dictionary
-VALUE_TABLES = {col: {str(key): value for key, value in mapping.items()} 
+VALUE_TABLES = {col: {str(key): value for key, value in mapping.items()}
                 for col, mapping in VALUE_TABLES.items()}
+"""

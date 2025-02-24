@@ -1,6 +1,7 @@
 import os
 import pandas as pd
-from value_table_dict import VALUE_TABLES as VALUE_TABLES  # Importing the value tables
+# Importing the value tables
+from value_table_dict import VALUE_TABLES as VALUE_TABLES
 
 # Set the data folder path (can be changed easily)
 FILE_PATH = os.path.expanduser(
@@ -40,7 +41,7 @@ def create_dataframe():
         '_RFBING6', '_RFDRHV8', '_PACAT3', 'MARITAL', 'EMPLOY1', 'INCOME3',
         'RENTHOM1', 'VETERAN3', 'LSATISFY', 'EMTSUPPRT', 'SDLONELY', 'SDHSTRE1',
         'COVIDPO1', 'MARIJAN1', '_IMPRACE', '_METSTAT', '_URBSTAT', '_HLTHPL1',
-        'LCSNUMCG', 'ASPIRIN'
+        'ASPIRIN'
     ]
 
     # Keep only selected columns if they exist in the dataset
@@ -55,22 +56,28 @@ def preprocess_dataframe():
 
     df1 = df.copy()
 
+    # df1 = df1.replace(VALUE_TABLES)
+
+    # Converts the dataframe columns to integers
+    df1 = df1.apply(pd.to_numeric, errors='coerce')  # Converts string to float
+
     df1 = df1.replace(VALUE_TABLES)
+
+    # Drop Null Values
+    # df1  = df1.dropna()
     return df1
 
 
+# -- Checking the dataframe
+def view_dataframe(brfss_df):
+    print(brfss_df.info())
 
-def view_dataframe_info():
-    # brfss_df = create_dataframe() Pipe-Line Check
+def dataframe_info():
+    brfss_df = create_dataframe()  # Pipe-Line Check
 
-    
     if brfss_df is not None:
         print(f"\n✅ BRFSS Dataset Loaded:")
         print(f"Shape: {brfss_df.shape}")
         print(f"Columns: {list(brfss_df.columns)}\n")
     else:
         print("\n❌ BRFSS Dataset is missing or could not be processed.\n")
-    # print(brfss_df.head(10))
-
-
-
