@@ -23,9 +23,8 @@
 - _MICHD (Coronary heart disease or myocardial infarction history)
 
 ## Lifestyle & Behavioral Risk Factors:
-- _SMOKER (Four-level smoking status)
-- SMOKEDAY2 (Current smoking frequency)
-- USENOW3 (Use of smokeless tobacco)
+- _SMOKER3 (Four-level smoking status)
+- SMOKDAY2 (Current smoking frequency)
 - ECIGNOW2 (E-cigarette use)
 - _CURECI2 (Current e-cigarette users)
 - MENTCIGS (Menthol cigarette use)
@@ -61,7 +60,7 @@
 - COVIDNU2 (Total COVID-19 vaccinations received)
 
 ### Marijuana Use (Consolidated into one feature):
-- MARIJANI (Days used in past 30 days)
+- MARIJAN1 (Days used in past 30 days)
 - MARJSMOK, MARJEAT, MARJVAPE, MARJDAB, MARJOTHR (Modes of use)
 
 
@@ -80,5 +79,4 @@
 
 ## Additional Medical & Screening Factors:
 - LCSNUMCG (Cigarettes per day when smoking)
-- LCSCTSC1 (Ever had chest CT/CAT scan)
 - ASPIRIN (Frequency of aspirin use for heart disease prevention)
