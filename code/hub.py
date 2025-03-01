@@ -16,15 +16,24 @@ def main():
     brfss_file_path = os.path.expanduser(
         "~/DataScience_Projects/Stroke_Risk_Assessment/data/Processed/brfss.csv"
     )
-    # Viewing the dataframe
-    preprocess.view_dataframe(brfss_df)
+    encoded_file_path = os.path.expanduser(
+        "~/DataScience_Projects/Stroke_Risk_Assessment/data/Encoded/encoded.csv"
+    )
 
+    # File does not exist, then create the csv file
     if not os.path.exists(brfss_file_path):
         convert_df_to_csv(brfss_df)
 
+    # Encoded csv for model training
+    encoded_df = preprocess.impute_val(brfss_df)
 
+    if not os.path.exists(encoded_file_path):
+        convert_df_to_csv(encoded_df)
 
     print('Process Complete ...')
+
+    # Checking the stats
+    preprocess.view_dataframe(encoded_df)
 
 
 if __name__ == "__main__":

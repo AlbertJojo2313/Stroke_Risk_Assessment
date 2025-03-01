@@ -1,116 +1,114 @@
+# Central BASE_MAPPING for missing and undefined values
 BASE_MAPPING = {
     7: "Don't know/Not sure",
     9: "Refused",
-    None: "NA"
+    None: 'NA',
+    'Missing': 'Missing'
 }
 
+# Function to apply BASE_MAPPING for any column
+
+
+def apply_base_mapping(mapping):
+    return {**mapping, **BASE_MAPPING}
+
+
+# Updated VALUE_TABLES
 VALUE_TABLES = {
-    'HTM4': {
-        None: 'NA'
-    },
-    'BMI': {
-        None: 'NA'
-    },
+    # --- Health Indicators ---
+    'HTM4': {None: 'NA'},
+    'BMI': {None: 'NA'},
+
     # --- Cardiovascular ---
-    'CVDSTRK3': {
+    'CVDSTRK3': apply_base_mapping({
         1: 'Yes',
         2: 'No',
-        **BASE_MAPPING
-    },
-    'BPHIGH6': {
+    }),
+    'BPHIGH6': apply_base_mapping({
         1: 'Yes',
         2: 'Yes (gestational)',
         3: 'No',
         4: 'Told borderline',
-        **BASE_MAPPING
-    },
-    'BPMEDS1': {
+    }),
+    'BPMEDS1': apply_base_mapping({
         1: 'Yes',
         2: 'No',
-        **BASE_MAPPING
-    },
+    }),
 
     # --- Cholesterol ---
-    'TOLDHI3': {
+    'TOLDHI3': apply_base_mapping({
         1: 'Yes',
         2: 'No',
-        **BASE_MAPPING
-    },
-    'CHOLMED3': {
+    }),
+    'CHOLMED3': apply_base_mapping({
         1: 'Yes',
         2: 'No',
-        **BASE_MAPPING
-    },
+    }),
+    'CVDCRHD4': apply_base_mapping({
+        1: 'Yes',
+        2: 'No',
+    }),
 
     # --- Diabetes ---
-    'PREDIAB2': {
+    'PREDIAB2': apply_base_mapping({
         1: 'Yes',
         2: 'Yes (gestational)',
         3: 'No',
-        **BASE_MAPPING
-    },
-    'DIABETE4': {
+    }),
+    'DIABETE4': apply_base_mapping({
         1: 'Yes',
         2: 'Yes (gestational)',
         3: 'No',
         4: 'Prediabetes',
-        **BASE_MAPPING
-    },
+    }),
 
     # --- Risk Factors ---
-    '_RFHYPE6': {
+    '_RFHYPE6': apply_base_mapping({
         1: 'No',
         2: 'Yes',
-        **BASE_MAPPING
-    },
-    '_RFCHOL3': {
+    }),
+    '_RFCHOL3': apply_base_mapping({
         1: 'No',
         2: 'Yes',
-        **BASE_MAPPING  # Fixed missing comma
-    },
+    }),
 
     # --- Tobacco/Substances ---
-    '_SMOKER3': {
+    '_SMOKER3': apply_base_mapping({
         1: 'Current everyday',
         2: 'Current some-day',
         3: 'Former',
         4: 'Never',
-        **BASE_MAPPING  # Fixed missing comma
-    },
-    'SMOKDAY2': {
+    }),
+    'SMOKDAY2': apply_base_mapping({
         1: 'Every day',
         2: 'Some days',
         3: 'Not at all',
-        **BASE_MAPPING
-    },
+    }),
 
     # --- Alcohol ---
-    '_RFBING6': {
+    '_RFBING6': apply_base_mapping({
         1: 'No',
         2: 'Yes',
-        **BASE_MAPPING
-    },
+    }),
 
     # --- Physical Activity ---
-    '_PACAT3': {
+    '_PACAT3': apply_base_mapping({
         1: 'Highly active',
         2: 'Active',
         3: 'Insufficiently active',
         4: 'Inactive',
-        **BASE_MAPPING
-    },
+    }),
 
     # --- Demographics ---
-    'MARITAL': {
+    'MARITAL': apply_base_mapping({
         1: 'Married',
         2: 'Divorced',
         3: 'Widowed',
         4: 'Separated',
         5: 'Never married',
         6: 'Unmarried couple',
-        **BASE_MAPPING
-    },
-    'EMPLOY1': {
+    }),
+    'EMPLOY1': apply_base_mapping({
         1: 'Employed',
         2: 'Self-employed',
         3: 'Unemployed (1+ years)',
@@ -119,9 +117,8 @@ VALUE_TABLES = {
         6: 'Student',
         7: 'Retired',
         8: 'Unable to work',
-        **BASE_MAPPING
-    },
-    'INCOME3': {
+    }),
+    'INCOME3': apply_base_mapping({
         1: '<$10k',
         2: '$10k-$15k',
         3: '$15k-$20k',
@@ -135,37 +132,32 @@ VALUE_TABLES = {
         11: '>$200k',
         77: "Don't know/Not sure",
         99: 'Refused',
-        None: 'NA',
-    },
-    'RENTHOM1': {
+    }),
+    'RENTHOM1': apply_base_mapping({
         1: 'Own',
         2: 'Rent',
         3: 'Other',
-        **BASE_MAPPING
-    },
-    'VETERAN3': {
+    }),
+    'VETERAN3': apply_base_mapping({
         1: 'Yes',
         2: 'No',
-        **BASE_MAPPING
-    },
+    }),
 
     # --- Mental Health ---
-    'LSATISFY': {
+    'LSATISFY': apply_base_mapping({
         1: 'Very satisfied',
         2: 'Satisfied',
         3: 'Dissatisfied',
         4: 'Very dissatisfied',
-        **BASE_MAPPING
-    },
+    }),
 
     # --- COVID ---
-    'COVIDPO1': {
+    'COVIDPO1': apply_base_mapping({
         1: 'Yes',
         2: 'No',
-        **BASE_MAPPING
-    },
+    }),
 
-    # --- Demographics ---
+    # --- Race/Ethnicity ---
     '_IMPRACE': {
         1: 'White',
         2: 'Black',
@@ -176,23 +168,32 @@ VALUE_TABLES = {
     },
 
     # --- Healthcare ---
-    '_HLTHPL1': {
+    '_HLTHPL1': apply_base_mapping({
         1: 'Yes',
         2: 'No',
-        **BASE_MAPPING
-    },
+    }),
 
     # --- Medications ---
-    'ASPIRIN': {
+    'ASPIRIN': apply_base_mapping({
         1: 'Daily',
         2: 'Some days',
         3: 'Former user',
         4: 'Non-user',
-        **BASE_MAPPING
-    }
+    })
 }
+
 """
 # Convert all keys to strings in the VALUE_TABLES dictionary
 VALUE_TABLES = {col: {str(key): value for key, value in mapping.items()}
-                for col, mapping in VALUE_TABLES.items()}
+                for col, mTpping in VALUE_TABLES.items()}
 """
+
+# Inverts the mapping
+
+
+def invert_mapping(value_tables):
+    inverted_tables = {}
+    for column, mapping in value_tables.items():
+        inverted_mapping = {v: k for k, v in mapping.items()}
+        inverted_tables[column] = inverted_mapping
+    return inverted_tables

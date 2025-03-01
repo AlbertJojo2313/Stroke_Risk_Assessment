@@ -1,7 +1,11 @@
 import os
 import pandas as pd
+import numpy as np
+import plotly.express as px
+from sklearn.impute import KNNImputer
+
 # Importing the value tables
-from value_table_dict import VALUE_TABLES as VALUE_TABLES
+from value_table_dict import VALUE_TABLES, invert_mapping
 
 # Set the data folder path (can be changed easily)
 FILE_PATH = os.path.expanduser(
@@ -35,7 +39,7 @@ def create_dataframe():
 
     # Columns to keep
     columns_to_keep = [
-        'HTM4', 'BMI', 'CVDSTRK3', 'BPHIGH6', 'BPMEDS1', 'TOLDHI3', 'CHOLMED3',
+        'HTM4', '_BMI5CAT', 'CVDSTRK3', 'BPHIGH6', 'BPMEDS1', 'TOLDHI3', 'CHOLMED3',
         'CVDINFR4', 'CVDCRHD4', 'PREDIAB2', 'DIABETE4', '_RFHYPE6', '_RFCHOL3',
         '_MICHD', '_SMOKER3', 'SMOKDAY2', 'ECIGNOW2', '_CURECI2', 'AVEDRNK3',
         '_RFBING6', '_RFDRHV8', '_PACAT3', 'MARITAL', 'EMPLOY1', 'INCOME3',
@@ -54,26 +58,80 @@ def create_dataframe():
 def preprocess_dataframe():
     df = create_dataframe()
 
+    if df is None:
+        return None
+
     df1 = df.copy()
 
-    # df1 = df1.replace(VALUE_TABLES)
-
-    # Converts the dataframe columns to integers
+    # Convert string values to numeric
     df1 = df1.apply(pd.to_numeric, errors='coerce')  # Converts string to float
 
+    # Replace with value table mappings
     df1 = df1.replace(VALUE_TABLES)
 
-    # Drop Null Values
-    # df1  = df1.dropna()
+    # Impute NULL Values
+    df1 = imputation_null_values(df1)
+
     return df1
 
 
-# -- Checking the dataframe
+# Returns an encoded dataframe
+def encoded_values(df):
+    inverted_value_tables = invert_mapping(VALUE_TABLES)
+    df_encoded = df.replace(inverted_value_tables)
+
+    return df_encoded
+
+
+def imputation_null_values(df):
+    """Handles missing values using KNN imputation & Drop small counts of null values."""
+
+    # Drop rows that have small null values
+    drop_small = ['CVDSTRK3', 'BPHIGH6', 'CVDINFR4', 'CVDCRHD4', 'DIABETE4']
+
+    df = df.dropna(subset=drop_small)
+
+    # Drop columns with excessive missing values
+    cols_to_drop = ['ASPIRIN']
+    df.drop(columns=cols_to_drop, inplace=True)
+
+    return df
+
+
+# Returns the final dataframe
+def impute_val(df):
+    # Make a new category "Missing" for NA values
+    cols_avoid = ['HTM4']  # Avoid these cols
+    cols_impute = [col for col in df.columns if col not in cols_avoid]
+    df[cols_impute] = df[cols_impute].fillna(
+        'Missing')  # Makes a new category Missing
+
+    # Impute numerical cols
+
+    ncols_impute = ['HTM4']
+
+    df[ncols_impute] = df[ncols_impute].apply(pd.to_numeric,errors='coerce')
+
+    knn__imputer = KNNImputer(n_neighbors=5)
+    df[ncols_impute] = knn__imputer.fit_transform(df[ncols_impute])
+
+    df[ncols_impute] = df[ncols_impute].round(0).astype(int)
+    df = encoded_values(df)
+    return df
+
+# ------Helper Functions------- #
+
+
 def view_dataframe(brfss_df):
+    """Displays null value counts and basic dataset info."""
+    count_null_values = brfss_df.isna().sum()
+    print(f"Total Null Value Count: {count_null_values} \n")
     print(brfss_df.info())
 
+
 def dataframe_info():
-    brfss_df = create_dataframe()  # Pipe-Line Check
+    """Prints information about the dataset."""
+    brfss_df = create_dataframe()
 
     if brfss_df is not None:
         print(f"\n✅ BRFSS Dataset Loaded:")
