@@ -7,6 +7,7 @@ Created on Mon Feb 24 10:58:22 2025
 """
 import os
 import preprocess
+import feature_engineering
 from new_updated_csv import convert_df_to_csv
 
 
@@ -26,12 +27,13 @@ def main():
 
     # Encoded csv for model training
     encoded_df = preprocess.impute_val(brfss_df)
+    encoded_df = feature_engineering.feature_engineering(encoded_df)
 
     if not os.path.exists(encoded_file_path):
         convert_df_to_csv(encoded_df)
 
     print('Process Complete ...')
-    
+
     # Checking the stats
     preprocess.view_dataframe(encoded_df)
 
