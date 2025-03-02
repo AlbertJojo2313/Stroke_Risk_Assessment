@@ -15,5 +15,3 @@ def convert_df_to_csv(brfss_df: pd.DataFrame):
     os.makedirs(OUTPUT_ENC_DIR, exist_ok=True)
     encoded_file_path = os.path.join(OUTPUT_ENC_DIR, "encoded.csv")
     brfss_df.to_csv(encoded_file_path, index=False)
-
-    print("\n Process Complete ...")

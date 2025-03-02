@@ -39,7 +39,7 @@ def create_dataframe():
 
     # Columns to keep
     columns_to_keep = [
-        'HTM4', '_BMI5CAT', 'CVDSTRK3', 'BPHIGH6', 'BPMEDS1', 'TOLDHI3', 'CHOLMED3',
+        'HTM4','WEIGHT2', '_BMI5CAT', 'CVDSTRK3', 'BPHIGH6', 'BPMEDS1', 'TOLDHI3', 'CHOLMED3',
         'CVDINFR4', 'CVDCRHD4', 'PREDIAB2', 'DIABETE4', '_RFHYPE6', '_RFCHOL3',
         '_MICHD', '_SMOKER3', 'SMOKDAY2', 'ECIGNOW2', '_CURECI2', 'AVEDRNK3',
         '_RFBING6', '_RFDRHV8', '_PACAT3', 'MARITAL', 'EMPLOY1', 'INCOME3',
@@ -65,6 +65,23 @@ def preprocess_dataframe():
 
     # Convert string values to numeric
     df1 = df1.apply(pd.to_numeric, errors='coerce')  # Converts string to float
+
+    def convert_to_kg(weight):
+        if weight in ['Refused', "Don't know/Not Sure", 'NAN', 'BLANK']:
+            return np.nan
+
+        if pd.isna(weight): return weight
+        weight = int(weight)
+
+        if 50 <=weight <= 776:
+            return round(weight * 0.453592,2)
+        elif 9023 <= weight <= 9352:
+            weight = int(str(weight)[1:]) # Removes the leading 9, according to the codebook
+            return round(weight,2)
+        return weight
+    
+    # Replace weight with kg.
+    df1['WEIGHT2'] = df1['WEIGHT2'].apply(convert_to_kg)
 
     # Replace with value table mappings
     df1 = df1.replace(VALUE_TABLES)
@@ -101,14 +118,14 @@ def imputation_null_values(df):
 # Returns the final dataframe
 def impute_val(df):
     # Make a new category "Missing" for NA values
-    cols_avoid = ['HTM4']  # Avoid these cols
+    cols_avoid = ['HTM4','WEIGHT2']  # Avoid these cols
     cols_impute = [col for col in df.columns if col not in cols_avoid]
     df[cols_impute] = df[cols_impute].fillna(
         'Missing')  # Makes a new category Missing
 
     # Impute numerical cols
 
-    ncols_impute = ['HTM4']
+    ncols_impute = ['HTM4','WEIGHT2']
 
     df[ncols_impute] = df[ncols_impute].apply(pd.to_numeric,errors='coerce')
 
@@ -116,12 +133,12 @@ def impute_val(df):
     df[ncols_impute] = knn__imputer.fit_transform(df[ncols_impute])
 
     df[ncols_impute] = df[ncols_impute].round(0).astype(int)
+
     df = encoded_values(df)
     return df
 
+
 # ------Helper Functions------- #
-
-
 def view_dataframe(brfss_df):
     """Displays null value counts and basic dataset info."""
     count_null_values = brfss_df.isna().sum()

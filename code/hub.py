@@ -31,7 +31,7 @@ def main():
         convert_df_to_csv(encoded_df)
 
     print('Process Complete ...')
-
+    
     # Checking the stats
     preprocess.view_dataframe(encoded_df)
 

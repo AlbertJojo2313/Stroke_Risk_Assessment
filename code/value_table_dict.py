@@ -17,7 +17,8 @@ def apply_base_mapping(mapping):
 VALUE_TABLES = {
     # --- Health Indicators ---
     'HTM4': {None: 'NA'},
-    'BMI': {None: 'NA'},
+    'WEIGHT2': {None: 'NA'},
+    '_BMI5CAT': apply_base_mapping({1: "Underweight", 2: "Normal Weight", 3: "Overweight", 4: "Obese"}),
 
     # --- Cardiovascular ---
     'CVDSTRK3': apply_base_mapping({
