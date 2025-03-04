@@ -18,6 +18,7 @@ VALUE_TABLES = {
     # --- Health Indicators ---
     'HTM4': {None: 'NA'},
     'WEIGHT2': {None: 'NA'},
+    '_SEX': {1: 'Male', 2: 'Female'},
     '_BMI5CAT': apply_base_mapping({1: "Underweight", 2: "Normal Weight", 3: "Overweight", 4: "Obese"}),
 
     # --- Cardiovascular ---

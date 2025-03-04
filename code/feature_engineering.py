@@ -7,6 +7,10 @@ def feature_engineering(df):
                             (df['DIABETE4'].isin([1, 2, 4])) & 
                             df['PREDIAB2'].isin([1, 2])).astype(int)
 
+    # Checking you have high blood pressure and cholestrol and also taking meds
+    df['BP_High & BP_MEDS'] = ((df['BPHIGH6'].isin([1,2])) & (df['BPMEDS1'] == 1)).astype(int)
+    df['CHOLESTROL_High & CHOLESTROL_MEDS'] = ((df['TOLDHI3'] == 1) & (df['CHOLMED3'] == 1)).astype(int)
+
     # Lifestyle risk (combining smoking and binge drinking)
     df['Unhealthy_Behavior'] = ((df['_SMOKER3'].isin([1, 2])) & (df['_RFBING6'] == 2)).astype(int)
 
@@ -25,6 +29,7 @@ def feature_engineering(df):
                                   (df['DIABETE4'].isin([1, 2, 4])) |
                                   (df['TOLDHI3'] == 1)).astype(int)
 
+    
     # Risk of Stroke: Combining CVD history, cholesterol, hypertension, and diabetes
     df['Stroke_Risk'] = ((df['CVDSTRK3'] == 1) |
                          (df['BPHIGH6'].isin([1, 2])) |
@@ -35,6 +40,10 @@ def feature_engineering(df):
     df['Lifestyle_Risk'] = ((df['_SMOKER3'].isin([1, 2])) |
                             (df['_RFBING6'] == 2) |
                             (df['_PACAT3'].isin([3, 4]))).astype(int)
+
+    # Chronic disease risk and life-style interaction
+    df['Chronic_Lifestyle_Interaction'] = df['Chronic_Disease_Risk'] * df['Lifestyle_Risk']
+
 
     # --- Healthcare Access ---
     # Healthcare Access: Whether a person has health insurance or not
@@ -58,8 +67,7 @@ def feature_engineering(df):
         weights['Lifestyle_Risk'] * df['Lifestyle_Risk']
     )
 
-    # --- Additional Features ---
-    # You can also normalize the Weighted Overall Health Risk if needed to get it into a 0-1 range
-    # Example: df['Normalized_Health_Risk'] = (df['Weighted_Overall_Health_Risk'] - df['Weighted_Overall_Health_Risk'].min()) / (df['Weighted_Overall_Health_Risk'].max() - df['Weighted_Overall_Health_Risk'].min())
+    # Normalize weighted overall risk
+    df['Weighted_Overall_Health_Risk'] = df['Weighted_Overall_Health_Risk'] / df['Weighted_Overall_Health_Risk'].max()
 
     return df
