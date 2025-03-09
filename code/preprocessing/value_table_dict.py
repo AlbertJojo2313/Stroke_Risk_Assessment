@@ -3,7 +3,7 @@ BASE_MAPPING = {
     7: "Don't know/Not sure",
     9: "Refused",
     None: 'NA',
-    'Missing': 'Missing'
+    -1: 'Missing'
 }
 
 # Function to apply BASE_MAPPING for any column
@@ -20,6 +20,30 @@ VALUE_TABLES = {
     'WEIGHT2': {None: 'NA'},
     '_SEX': {1: 'Male', 2: 'Female'},
     '_BMI5CAT': apply_base_mapping({1: "Underweight", 2: "Normal Weight", 3: "Overweight", 4: "Obese"}),
+
+    'MARIJAN1': apply_base_mapping({
+        88: 'None',
+        77: "Don't know/Not sure",
+        99: "Refused",
+    }),
+    'AVEDRNK3': apply_base_mapping({
+        77: "Don't Know",
+        99: "Refused",
+    }),
+    'SDLONELY': apply_base_mapping({
+        1: "Always",
+        2: "Usually",
+        3: "Sometimes",
+        4: "Rarely",
+        5: "Never",
+    }),
+    'SDHSTRE1': apply_base_mapping({
+        1: "Always",
+        2: "Usually",
+        3: "Sometimes",
+        4: "Rarely",
+        5: "Never",
+    }),
 
     # --- Cardiovascular ---
     'CVDSTRK3': apply_base_mapping({
@@ -143,6 +167,24 @@ VALUE_TABLES = {
     'VETERAN3': apply_base_mapping({
         1: 'Yes',
         2: 'No',
+    }),
+    '_METSTAT': apply_base_mapping({
+        1: "Metropolitan counties",
+        2: "Non-metropolitan counties"
+    }),
+    '_URBSTAT': apply_base_mapping({
+        1: "Urban Counties",
+        2: "Rural Counties", 
+    }),
+    'ECIGNOW2': apply_base_mapping({
+        1: "Never Used",
+        2: "Everyday",
+        3: "Some-days",
+        4: "Not right now",
+    }),
+    '_MICHD': apply_base_mapping({
+        1: "Have MI/CHD",
+        2: "Did not MI/CHD",
     }),
 
     # --- Mental Health ---

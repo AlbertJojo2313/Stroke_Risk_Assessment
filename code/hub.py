@@ -4,7 +4,10 @@
 Created on Mon Feb 24 10:58:22 2025
 @author: aj
 """
+import sys
 import os
+preprocess_module = os.path.expanduser('~/DataScience_Projects/Stroke_Risk_Assessment/code/preprocessing')
+sys.path.append(preprocess_module)
 import preprocess
 import feature_engineering
 from new_updated_csv import convert_df_to_csv
