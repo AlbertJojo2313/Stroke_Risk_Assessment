@@ -1,9 +1,14 @@
 import os
 import pandas as pd
+
 OUTPUT_DIR = os.path.expanduser(
     "~/DataScience_Projects/Stroke_Risk_Assessment/data/Processed")
 OUTPUT_ENC_DIR = os.path.expanduser(
     "~/DataScience_Projects/Stroke_Risk_Assessment/data/Encoded")
+
+FINAL_DATA_DIR = os.path.expanduser(
+    "~/DataScience_Projects/Stroke_Risk_Assessment/data/Final_Data"
+)
 
 
 def convert_df_to_csv(brfss_df: pd.DataFrame):
@@ -15,3 +20,7 @@ def convert_df_to_csv(brfss_df: pd.DataFrame):
     os.makedirs(OUTPUT_ENC_DIR, exist_ok=True)
     encoded_file_path = os.path.join(OUTPUT_ENC_DIR, "encoded.csv")
     brfss_df.to_csv(encoded_file_path, index=False)
+
+    os.makedirs(FINAL_DATA_DIR, exist_ok=True)
+    final_data_path = os.path.join(FINAL_DATA_DIR, "final_data.csv")
+    brfss_df.to_csv(final_data_path, index=False)

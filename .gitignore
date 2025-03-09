@@ -2,6 +2,6 @@
 .DS_Store
 .env
 data/
-__pycache__data/
+*__pycache__data
 code/__pycache__/
 test.py
