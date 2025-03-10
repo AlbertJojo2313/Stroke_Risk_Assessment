@@ -63,9 +63,7 @@ def reduce_colinearity(df):
     return df
 
 
-df  = open_csv(FILE_PATH)
-df_final  = reduce_colinearity(df)
-print(df.info())
+
 
 
 

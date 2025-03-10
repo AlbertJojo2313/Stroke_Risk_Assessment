@@ -5,3 +5,4 @@ data/
 *__pycache__data
 code/__pycache__/
 test.py
+SQL_Database
