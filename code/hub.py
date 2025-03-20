@@ -39,6 +39,7 @@ def main():
 
     # Final data set
     final_df = analysis.reduce_colinearity(encoded_df)
+    final_df = preprocess.to_lowercase(final_df)
 
  
 

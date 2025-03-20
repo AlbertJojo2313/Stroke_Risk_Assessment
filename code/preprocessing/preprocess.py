@@ -156,3 +156,7 @@ def dataframe_info():
         print(f"Columns: {list(brfss_df.columns)}\n")
     else:
         print("\n❌ BRFSS Dataset is missing or could not be processed.\n")
+
+def to_lowercase(df):
+    df.columns = df.columns.str.lower()
+    return df
